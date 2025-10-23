@@ -10,31 +10,31 @@ pipeline {
 
         stage('Build') {
             steps {
-                sh 'docker-compose build'
+                bat 'docker-compose build'
             }
         }
 
         stage('Run Bandit Scan') {
             steps {
-                sh 'bandit -r . || true'
+                bat 'bandit -r . || true'
             }
         }
 
         stage('Run Tests') {
             steps {
-                sh 'pytest || true'
+                bat 'pytest || true'
             }
         }
 
         stage('Build Docker Image') {
             steps {
-                sh 'docker build -t lab2-web .'
+                bat 'docker build -t lab2-web .'
             }
         }
 
         stage('Run Trivy Scan') {
             steps {
-                sh 'trivy image lab2-web || true'
+                bat 'trivy image lab2-web || true'
             }
         }
     }
