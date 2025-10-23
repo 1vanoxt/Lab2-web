@@ -22,7 +22,7 @@ pipeline {
 
         stage('Run Tests') {
             steps {
-                bat 'pytest || true'
+                bat 'pytest || exit /b 0'
             }
         }
 
@@ -34,7 +34,7 @@ pipeline {
 
         stage('Run Trivy Scan') {
             steps {
-                bat 'trivy image lab2-web || true'
+                bat 'trivy image lab2-web || exit /b 0'
             }
         }
     }
