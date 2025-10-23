@@ -21,10 +21,11 @@ pipeline {
         }
 
         stage('Run Tests') {
-            steps {
-                bat 'pytest || exit /b 0'
-            }
+          steps {
+              bat 'docker run --rm -v %cd%:/app lab2-web python -m bandit -r . -f txt -o bandit_report.txt || exit /b 0'
+          }
         }
+
 
         stage('Build Docker Image') {
             steps {
@@ -34,7 +35,7 @@ pipeline {
 
         stage('Run Trivy Scan') {
             steps {
-                bat 'trivy image lab2-web || exit /b 0'
+                bat 'docker run --rm -v %cd%:/app aquasec/trivy image lab2-web || exit /b 0'
             }
         }
     }
