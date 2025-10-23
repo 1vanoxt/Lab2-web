@@ -16,7 +16,7 @@ pipeline {
 
         stage('Run Bandit Scan') {
             steps {
-                bat 'bandit -r . || true'
+                bat 'chcp 65001 && python -m bandit -r . -f txt -o bandit_report.txt'
             }
         }
 
