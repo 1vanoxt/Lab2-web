@@ -2,7 +2,7 @@
 services:
   web:
     build: .
-    container_name: flask_app
+    container_name: flask_app_${BUILD_NUMBER}
     ports:
       - "5000:5000"
     volumes:
